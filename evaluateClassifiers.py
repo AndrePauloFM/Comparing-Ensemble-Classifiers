@@ -3,18 +3,13 @@ from sklearn.ensemble import AdaBoostClassifier
 from sklearn.ensemble import RandomForestClassifier
 import pandas as pd
 
-"""# Classe - Heterogeneous Polling"""
+"""# Class - Heterogeneous Polling"""
 import heterogeneousClassifier as HP
 
-"""# Função para realizar o teste em grade"""
 import gridTest
-
-
-"""# Função Para calcular as Métricas avaliadas"""
 import getResults
 
 
-"""# Pandas dataFrame para os dados tabulados"""
 dfResultClassifier = pd.DataFrame(columns=['Métodos', 'Média', 'STD', 'Limite Inferior', 'Limite Superior'])
 dfResultClassifier['Métodos'] = ['Bagging', 'AdaBoost', 'RandomForest', 'HeterogeneousPooling']
 
@@ -32,9 +27,9 @@ def evaluateClassifiers(dataBase):
     bagScores = gridTest.GridTestModel(dataBase, model, grid)
 
     # Resultados
-    print('****** Resultados ******\n')
-    print('Base de Dados: ', dataBase.DESCR[4:18])
-    print('Modelo - ', str(model)[0:17], '\n')
+    print('****** Results ******\n')
+    print('DataBase: ', dataBase.DESCR[4:18])
+    print('Model - ', str(model)[0:17], '\n')
     bag_mean, bag_std, bag_inf, bag_sup = getResults.getResults(bagScores)
 
 
@@ -53,9 +48,9 @@ def evaluateClassifiers(dataBase):
     adaScores = gridTest.GridTestModel(dataBase, model, grid)
 
     # Resultados
-    print('****** Resultados ******\n')
-    print('Base de Dados: ', dataBase.DESCR[4:18])
-    print('Modelo - ', str(model)[0:18], '\n')
+    print('****** Results ******\n')
+    print('DataBase: ', dataBase.DESCR[4:18])
+    print('Model - ', str(model)[0:18], '\n')
     ada_mean, ada_std, ada_inf, ada_sup = getResults.getResults(adaScores)
 
     dfResultClassifier.iloc[1] = ['Adaboost', ada_mean, ada_std, ada_inf, ada_sup]
@@ -72,10 +67,10 @@ def evaluateClassifiers(dataBase):
     print('Model Evaluate... RandomForestClassifier')
     rfScores = gridTest.GridTestModel(dataBase, model, grid)
 
-    # Resultados
-    print('****** Resultados ******\n')
-    print('Base de Dados: ', dataBase.DESCR[4:18])
-    print('Modelo - ', str(model)[0:22], '\n')
+    # Results
+    print('****** Results ******\n')
+    print('DataBase: ', dataBase.DESCR[4:18])
+    print('Model - ', str(model)[0:22], '\n')
     rf_mean, rf_std, rf_inf, rf_sup = getResults.getResults(rfScores)
 
     dfResultClassifier.iloc[2] = ['RandomForest', rf_mean, rf_std, rf_inf, rf_sup]
@@ -92,13 +87,13 @@ def evaluateClassifiers(dataBase):
     print('Model Evaluate... Heterogeneous Classifier')
     hpScores = gridTest.GridTestModel(dataBase, model, grid)
 
-    # Resultados
-    print('****** Resultados ******\n')
-    print('Base de Dados: ', dataBase.DESCR[4:18])
-    print('Modelo - ', str(model)[0:23], '\n')
+    # Results
+    print('****** Results ******\n')
+    print('DataBase: ', dataBase.DESCR[4:18])
+    print('Model - ', str(model)[0:23], '\n')
     hp_mean, hp_std, hp_inf, hp_sup = getResults.getResults(hpScores)
 
-    """## Resultados Classificadores Acurácia"""
+    """## Results Classifiers Accuracy"""
 
     dfResultClassifier.iloc[3] = ['Heterogeneous', hp_mean, hp_std, hp_inf, hp_sup]
     dfResultClassifier
@@ -110,13 +105,13 @@ def evaluateClassifiers(dataBase):
     for i in range(len(scores)):
       fig.add_trace(go.Box(y=scores[i], name=scoresNames[i]))
     fig.update_layout(
-        yaxis_title='Acurácia',
-        xaxis_title='Modelos',
-        title=dataBase.DESCR[4:18]+' Desempenho dos Modelos  - Acurácia',
+        yaxis_title='Accuracy',
+        xaxis_title='Models',
+        title=dataBase.DESCR[4:18]+' Models Performance  - Accuracy',
     )
     fig.show()
 
-    """## Teste Pareado"""
+    """## Paired t-test and Wilcoxon Test"""
 
     from scipy.stats import ttest_rel, wilcoxon
     scores = [bagScores, adaScores, rfScores, hpScores]
