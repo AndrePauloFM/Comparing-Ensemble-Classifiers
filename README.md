@@ -1,7 +1,7 @@
 # Comparing-Ensemble-Classifiers
-Experimental comparison between 4 ensemble classifiers - Bagging, AdaBoost, RandomForest e HeterogeneousPooling.
-
 *André Paulo Ferreira Machado*
+
+Experimental comparison between 4 ensemble classifiers - Bagging, AdaBoost, RandomForest e HeterogeneousPooling.
 
 *Ensemble Classifiers*
 
