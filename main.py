@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""*Primeiro Trabalho de Inteligência Artificial e Sistemas Inteligentes - Combinado de Classificadores*
+"""*Combinado de Classificadores*
 
 *André Paulo Ferreira Machado*
 
