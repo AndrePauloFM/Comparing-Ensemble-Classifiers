@@ -7,13 +7,13 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.naive_bayes import GaussianNB
 from sklearn.neighbors import KNeighborsClassifier
 
-"""# Classe - Heterogeneous Polling"""
+"""# Class - Heterogeneous Polling"""
 
 def mostCommon(estimatorsPredict):
   
     return [Counter(col).most_common() for col in zip(*estimatorsPredict)]
   
-"""# Votação Classificadores"""
+"""# Voting Classifiers"""
 def votingClass(predMatrix, y_train):
 
     saida = np.array([])
@@ -36,7 +36,7 @@ def votingClass(predMatrix, y_train):
         saida = np.append(saida, valuesFrequency[j][0][0])
     return saida
 
-"""# Comparação entre Elementos empatados na Votação"""
+"""# Compare tie results"""
 def compareFrequencyValues(y_train, elementsTie):
       indexElements = []
       orderArray = getMostfrequentValues(y_train)
