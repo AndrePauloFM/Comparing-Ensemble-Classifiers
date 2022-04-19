@@ -1,30 +1,24 @@
 # -*- coding: utf-8 -*-
-"""*Combinado de Classificadores*
+"""*Ensemble Classifiers*
 
 *André Paulo Ferreira Machado*
 
-Este trabalho consiste em realizar uma comparação experimental entre um conjunto pré-definido de técnicas de aprendizado 
-para classificação automática, baseadas na ideia de combinados de classificadores, aplicadas a alguns 
-problemas de classificação. As técnicas escolhidas são: Bagging, AdaBoost, RandomForest e HeterogeneousPooling.
+This work consists of carrying out an experimental comparison between a pre-defined set of learning techniques
+for automatic classification, based on the idea of combined classifiers, applied to some
+classification problems. The chosen techniques are: Bagging, AdaBoost, RandomForest and HeterogeneousPooling.
 
-As bases de dados utilizadas: digits, wine e breast cancer.
+Databases used: digits, wine e breast cancer.
 """
 
-"""
-Arquivo Jupter GoogleColab Localizado em:
-    https://colab.research.google.com/drive/1lcFN7jYthD_4zRs_Y0FdGNANtQvBFsaC
+"""The results of each classifier are presented in a table containing the average of the accuracies
+obtained in each fold of the external cycle, the standard deviation and the confidence interval at 95% of significance
+of the results, and also through the boxplot of the results of each classifier in each fold.
 
-"""
-
-"""Os resultados de cada classificador são apresentados numa tabela contendo a média das acurácias 
-obtidas em cada fold do ciclo externo, o desvio padrão e o intervalo de confiança a 95% de significância 
-dos resultados, e também através do boxplot dos resultados de cada classificador em cada fold.
-
-Os dados utilizados no conjunto de treino em cada rodada de teste são padronizados (normalizados o com z-score). 
-Os valores de padronização obtidos nos dados de treino são utilizados para padronizar os dados do respectivo conjunto de teste.
-O procedimento experimental de treinamento, validação e teste é realizado através de 3 rodadas de ciclos aninhados 
-de validação e teste, com o ciclo interno de validação contendo 4 folds e o externo de teste com 10 folds. 
-A busca em grade (grid search) do ciclo interno considera os os valores de hiperparâmetros definidos para cada técnica de aprendizado.
+The data used in the training set in each test run are standardized (normalized or z-score).
+The standardization values ​​obtained from the training data are used to standardize the data of the respective test set.
+The experimental procedure of training, validation and testing is carried out through 3 rounds of nested cycles
+validation and testing cycle, with the internal validation cycle containing 4 folds and the external testing cycle containing 10 folds.
+The grid search of the internal loop considers the hyperparameter values ​​defined for each learning technique.
 """
 
 from sklearn import datasets
@@ -32,36 +26,36 @@ from sklearn import datasets
 import inquirer
 
 
-"""# Avaliação dos Classificadores"""
+"""# Evatuate Classifiers"""
 import evaluateClassifiers as evaluate
 
 
-"""# Seleção da Bases de Dados"""
+"""# DataBase Selection"""
 questions = [
   inquirer.List('base',
-                message="Selecione a Base de Dados",
+                message="Select one DataBase",
                 choices=['Digits', 'Wine', 'Breast Cancer'],
             ),
 ]
 answers = inquirer.prompt(questions)
 
 def functionDigits():
-    print("Base de Dados Digits selecionada")
+    print("DataBase Digits selected")
     dataBase = datasets.load_digits()
     return dataBase
 
 def functionWine():
-    print("Base de Dados Wine selecionada")
+    print("DataBase Wine selected")
     dataBase = datasets.load_wine()
     return dataBase
 
 def functionBreast():
-    print("Base de Dados Breast Cancer selecionada")
+    print("DataBase Breast Cancer selected")
     dataBase = datasets.load_breast_cancer()
     return dataBase
 
 def default():
-    print("Selecione Uma Base de Dados")
+    print("Select one DataBase")
 
 if __name__ == "__main__":
     switch = {
